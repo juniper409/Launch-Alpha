@@ -12,6 +12,15 @@ import sys
 import time
 import tweepy
 
+
+
+line = '-'*10
+auth = tweepy.OAuthHandler(access.consumer_key, access.consumer_secret)
+auth.set_access_token(access.access_token, access.access_token_secret)
+api = tweepy.API(auth)
+user = api.get_user
+
+
 while True:
 #Ask how many seconds for refresh.
     try:
@@ -20,13 +29,6 @@ while True:
     except:
         print("Please enter a number")
 
-
-line = '-'*10
-
-auth = tweepy.OAuthHandler(access.consumer_key, access.consumer_secret)
-auth.set_access_token(access.access_token, access.access_token_secret)
-api = tweepy.API(auth)
-user = api.get_user
 
 
 while True:
