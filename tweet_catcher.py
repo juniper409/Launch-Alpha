@@ -26,7 +26,4 @@ def tweet(userID, title):
 
 
 
-#Twitter user - assign variable with needed data.
-
-
 
