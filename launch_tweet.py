@@ -6,72 +6,43 @@ GitLab:juniper409
 Contact: mrjuniper409@gmail.com
 --------------------------------------------------------------------------------------------
 """
-import access
-import os
-import sys
+from tweet_catcher import tweet
 import time
-import tweepy
-
-
-
-line = '-'*10
-
-auth = tweepy.OAuthHandler(access.consumer_key, access.consumer_secret)
-auth.set_access_token(access.access_token, access.access_token_secret)
-api = tweepy.API(auth)
-user = api.get_user
-
+import os
 
 while True:
 
+    provider = (input('What is the launch provider? '))
+    seconds = int(input('Seconds between refreshes: '))
+    lp_input = provider.lower()
 
-    #SpaceX
-    def spacex_tweet():
-        spacex = api.get_user('34743251', number_of_tweets = 2)
-        print(line + ' SPACEX ' + str(spacex.status.created_at) + line)
-        print(spacex.status.text + '\n')
-    #Spaceflight Now
-    def sfn_tweet():
-        sfn = api.get_user('17217640', number_of_tweets = 2)
-        print(line + ' SPACEFLIGHT NOW ' + line)
-        print(sfn.status.text + '\n')
+    while True:
+        if lp_input == 'spacex':
+            tweet('34743251', 'SPACEX OFFICIAL')
+            tweet('44196397', 'ELON MUSK')
+            tweet('1011352897144180737', 'SPACEX FLEET')
+            tweet('17217640', 'SPACEFLIGHT NOW')
+            time.sleep(seconds)
+            os.system('clear')
 
-    #SpaceX Fleet
-    def fleet_tweet():
-        fleet = api.get_user('1011352897144180737', number_of_tweets = 2)
-        print(line + ' SPACEX FLEET ' + str(fleet.status.created_at) + line)
-        print(fleet.status.text + '\n')
+        elif lp_input == 'ula' or lp_input == 'united launch alliance':
+            tweet('22845770', 'UNITED LAUNCH ALLIANCE OFFICIAL')
+            tweet('2882413844', 'TORY BRUNO')
+            tweet('17217640', 'SPACEFLIGHT NOW')
+            time.sleep(seconds)
+            os.system('clear')
 
-    def elon_tweet():
-        elon = api.get_user('44196397', number_of_tweets = 2)
-        print(line + ' ELON MUSK ' + str(elon.status.created_at) + line)
-        print(elon.status.text + '\n')
+        elif lp_input == 'rocket lab' or lp_input == 'rocketlab':
+            tweet('91145174', 'ROCKET LAB OFFICIAL')
+            tweet('976574172468936704', 'PETER BECK')
+            tweet('17217640', 'SPACEFLIGHT NOW')
+            time.sleep(seconds)
+            os.system('clear')
 
-    def countdown():
-        while t:
-            mins, sec = divmod(t, 60)
-            timer = '{:00}:{:120}'.format(mins, sec)
-            print(timer, end='\r')
-            time.sleep(120)
-        print('Refreshing...')
-
-    spacex_tweet()
-    sfn_tweet()
-    fleet_tweet()
-    elon_tweet()
-    #time.sleep(300)
-
-#Countdown to refresh
-    def countdown(t):
-        while t > 0:
-            sys.stdout.write('\rNext Refresh : {}s'.format(t))
-            t -= 1
-            sys.stdout.flush()
-            time.sleep(1)
-
-    countdown(300)
+        elif lp_input == 'help' or lp_input == '?':
+            print('The followng providers are accepted:', '\n', '-SpaceX', '\n', '-United launch Alliance -or- ULA', '\n', '-Rocketlab')
 
 
-    os.system('clear' if os.name == 'nt' else 'clear')
-else:
-    print('Something went wrong')
+        else:
+            print('Launch provider not found. Please try again.')
+            break
